@@ -1,10 +1,18 @@
 import React from "react";
 import AnimatedBackground from "./component/AnimatedBackground";
 import ScrollSection from "./component/ScrollSection";
+import PillNav from "./component/PillNav"; // Navbar component
 import "./App.css";
 
 function App() {
   const name = "Karthik";
+
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Contact", href: "/contact" },
+  ];
 
   return (
     <>
@@ -38,8 +46,10 @@ function App() {
         </div>
       </section>
 
-      {/* SCROLL SECTION */}
-      <ScrollSection />
+      {/* SCROLL SECTION WITH NAVBAR */}
+      <ScrollSection>
+        <PillNav items={navItems} />
+      </ScrollSection>
     </>
   );
 }

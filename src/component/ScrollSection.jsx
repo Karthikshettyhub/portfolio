@@ -1,74 +1,128 @@
 import React, { useEffect, useRef, useState } from "react";
-import PillNav from "./PillNav"; // your existing PillNav component
+import PillNav from "./PillNav";
+import ProfileCard from "./ProfileCard";
+import ProjectsSection from "./ProjectsSection";
+import SkillsSection from "./SkillsSection";
 
+export default function ScrollSection({ children }) {
+  const profileRef = useRef(null);
+  const projectsRef = useRef(null);
+  const skillsRef = useRef(null);
 
-export default function ScrollSection() {
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
+  const [profileShow, setProfileShow] = useState(false);
+  const [projectsShow, setProjectsShow] = useState(false);
+  const [skillsShow, setSkillsShow] = useState(false);
 
-  useEffect(() => {
+  const observe = (ref, setFunc) => {
     const el = ref.current;
+    if (!el) return;
     const obs = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setShow(true);
+          setFunc(true);
           obs.disconnect();
         }
       },
       { threshold: 0.2 }
     );
     obs.observe(el);
+  };
+
+  useEffect(() => {
+    observe(profileRef, setProfileShow);
+    observe(projectsRef, setProjectsShow);
+    observe(skillsRef, setSkillsShow);
   }, []);
+
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Projects", href: "/projects" },
+    { label: "Skills", href: "/skills" },
+    { label: "Contact", href: "/contact" },
+  ];
 
   return (
     <section
-      ref={ref}
       style={{
         width: "100%",
-        minHeight: "100vh",
-        padding: "6rem 1.5rem",
-        background: "#060606",
+        background: "#121212",
         color: "white",
         position: "relative",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start",
-        gap: "3rem",
         overflow: "hidden",
       }}
     >
-      {/* GRID BACKGROUND */}
+      {/* Navbar */}
+      <div style={{ width: "100%", maxWidth: "1200px", margin: "2rem auto" }}>
+        <PillNav items={navItems} />
+      </div>
+
+      {/* ProfileCard */}
+      <div
+        ref={profileRef}
+        style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "2rem",
+            maxWidth: "1100px",
+            marginTop: "7rem", // <-- added top margin to push it down
+            opacity: profileShow ? 1 : 0,
+            transform: profileShow ? "translateY(-100px)" : "translateY(20px)",
+            transition: "all 0.7s ease",
+            flexWrap: "wrap",
+            zIndex: 10,
+            marginBottom: "4rem",
+        }}
+      >
+        <ProfileCard />
+      </div>
+
+      {/* ProjectsSection */}
+      <div
+        ref={projectsRef}
+        style={{
+          width: "100%",
+          maxWidth: "1200px",
+          opacity: projectsShow ? 1 : 0,
+          transform: projectsShow ? "translateY(40px)" : "translateY(40px)",
+          transition: "all 0.7s ease",
+          marginBottom: "4rem",
+        }}
+      >
+        <ProjectsSection />
+      </div>
+
+      {/* SkillsSection */}
+      <div
+        ref={skillsRef}
+        style={{
+          width: "100%",
+          maxWidth: "1200px",
+          opacity: skillsShow ? 1 : 0,
+          transform: skillsShow ? "translateY(0px)" : "translateY(50px)",
+          transition: "all 0.7s ease",
+          marginBottom: "6rem",
+        }}
+      >
+        <SkillsSection />
+      </div>
+
+      {/* Grid Background */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          zIndex: 0,
           backgroundSize: "40px 40px",
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
+          zIndex: 0,
         }}
       />
-
-      {/* PILL NAVBAR */}
-      <div style={{ width: "100%", zIndex: 10 }}>
-        <PillNav
-          items={[
-            { label: "Home", href: "/" },
-            { label: "About", href: "/about" },
-            { label: "Services", href: "/services" },
-            { label: "Contact", href: "/contact" },
-          ]}
-          activeHref="/"
-          className="custom-nav"
-          ease="power2.easeOut"
-          baseColor="#ffffff"
-          pillColor="#111111"
-          hoveredPillTextColor="#ffffff"
-          pillTextColor="#ffffff"
-        />
-      </div>
     </section>
   );
 }
