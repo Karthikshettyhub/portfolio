@@ -1,0 +1,59 @@
+.pill-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    z-index: 10;
+  }
+  
+  .pill-list {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .pill {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: var(--pill-bg);
+    color: var(--pill-text);
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .pill.is-active {
+    font-weight: 600;
+  }
+  
+  .label-stack {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pill-label-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: var(--hover-text);
+    opacity: 0;
+  }
+  
+  .hover-circle {
+    position: absolute;
+    background-color: var(--pill-bg);
+    border-radius: 50%;
+    pointer-events: none;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+  }
+  

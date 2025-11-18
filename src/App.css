@@ -1,0 +1,249 @@
+/* ---------------------------------------------------
+   RESET ROOT + BASE STYLES
+--------------------------------------------------- */
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  background: #000;
+  font-family: "Poppins", sans-serif;
+
+  /* HIDE SCROLLBAR (Chrome, Edge, Firefox) */
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for WebKit */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/* ---------------------------------------------------
+   SCROLL MAGNET / SCROLL SNAP
+--------------------------------------------------- */
+html,
+body {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-snap-align: start;
+}
+
+/* Fullscreen hero */
+.hero-section {
+  height: 100vh !important;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------
+   BACKGROUND ANIMATION CIRCLES
+--------------------------------------------------- */
+@keyframes circle-move {
+  0% {
+    transform: translate(var(--tx-1), var(--ty-1));
+  }
+  33% {
+    transform: translate(var(--tx-2), var(--ty-2));
+  }
+  66% {
+    transform: translate(var(--tx-3), var(--ty-3));
+  }
+  100% {
+    transform: translate(var(--tx-4), var(--ty-4));
+  }
+}
+
+.animate-background-gradient {
+  animation: circle-move 18s ease-in-out infinite alternate;
+  position: absolute;
+  will-change: transform;
+  filter: blur(70px);
+}
+
+/* ---------------------------------------------------
+   MAIN CONTENT CONTAINER
+--------------------------------------------------- */
+.main-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfect vertical + horizontal centering */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ---------------------------------------------------
+   NAME ANIMATION
+--------------------------------------------------- */
+.animated-name {
+  font-size: 4rem;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 1.5rem; /* spacing between name and scroll indicator */
+  font-family: "Great Vibes", cursive;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: center;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterBlurIn 0.8s ease-out forwards;
+}
+
+@keyframes letterBlurIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------------------------------
+   SCROLL INDICATOR BELOW NAME
+--------------------------------------------------- */
+.scroll-holder {
+  margin-top: 20px; /* distance from name */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* scale down the scroll indicator */
+  transform: scale(0.7);
+}
+
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  opacity: 0;
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease-out 2s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-text {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.scroll-box {
+  width: 2rem;
+  height: 3rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.scroll-dot {
+  width: 0.25rem;
+  height: 0.75rem;
+  background: white;
+  border-radius: 9999px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------
+   OPTIONAL VITE LOGO
+--------------------------------------------------- */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* BASIC CARD + DOCS */
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
