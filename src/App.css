@@ -1,6 +1,3 @@
-/* ---------------------------------------------------
-   RESET ROOT + BASE STYLES
---------------------------------------------------- */
 #root {
   width: 100%;
   height: 100%;
@@ -16,20 +13,14 @@ body {
   overflow-x: hidden;
   background: #000;
   font-family: "Poppins", sans-serif;
-
-  /* HIDE SCROLLBAR (Chrome, Edge, Firefox) */
   scrollbar-width: none;
 }
 
-/* Hide scrollbar for WebKit */
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
 }
 
-/* ---------------------------------------------------
-   SCROLL MAGNET / SCROLL SNAP
---------------------------------------------------- */
 html,
 body {
   scroll-snap-type: y mandatory;
@@ -40,7 +31,6 @@ section {
   scroll-snap-align: start;
 }
 
-/* Fullscreen hero */
 .hero-section {
   height: 100vh !important;
   width: 100%;
@@ -48,9 +38,6 @@ section {
   overflow: hidden;
 }
 
-/* ---------------------------------------------------
-   BACKGROUND ANIMATION CIRCLES
---------------------------------------------------- */
 @keyframes circle-move {
   0% {
     transform: translate(var(--tx-1), var(--ty-1));
@@ -73,19 +60,18 @@ section {
   filter: blur(70px);
 }
 
-/* ---------------------------------------------------
-   MAIN CONTENT CONTAINER
---------------------------------------------------- */
 .main-container {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Perfect vertical + horizontal centering */
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 10;
+  max-width: 100%;
+  padding: 0 1rem;
 }
 
 .center-content {
@@ -96,18 +82,16 @@ section {
   text-align: center;
 }
 
-/* ---------------------------------------------------
-   NAME ANIMATION
---------------------------------------------------- */
 .animated-name {
   font-size: 4rem;
   font-weight: 400;
   color: white;
-  margin-bottom: 1.5rem; /* spacing between name and scroll indicator */
+  margin-bottom: 1.5rem;
   font-family: "Great Vibes", cursive;
   letter-spacing: 0.05em;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -130,16 +114,11 @@ section {
   }
 }
 
-/* ---------------------------------------------------
-   SCROLL INDICATOR BELOW NAME
---------------------------------------------------- */
 .scroll-holder {
-  margin-top: 20px; /* distance from name */
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* scale down the scroll indicator */
   transform: scale(0.7);
 }
 
@@ -207,9 +186,48 @@ section {
   }
 }
 
-/* ---------------------------------------------------
-   OPTIONAL VITE LOGO
---------------------------------------------------- */
+@media (max-width: 480px) {
+  .animated-name {
+    font-size: 2.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .scroll-text {
+    font-size: 0.9rem;
+  }
+
+  .scroll-box {
+    width: 1.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .animated-name {
+    font-size: 3rem;
+  }
+
+  .main-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animated-name {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .animated-name {
+    font-size: 5.5rem;
+  }
+
+  .main-container {
+    max-width: 1400px;
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -239,7 +257,6 @@ section {
   }
 }
 
-/* BASIC CARD + DOCS */
 .card {
   padding: 2em;
 }

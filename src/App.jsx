@@ -1,7 +1,7 @@
 import React from "react";
 import AnimatedBackground from "./component/AnimatedBackground";
 import ScrollSection from "./component/ScrollSection";
-import PillNav from "./component/PillNav"; // Navbar component
+import PillNav from "./component/PillNav";
 import "./App.css";
 
 function App() {
@@ -15,15 +15,20 @@ function App() {
   ];
 
   return (
-    <>
+    <div className="app-root">
       {/* HERO SECTION */}
-      <section className="hero-section">
+      <section className="hero-section" role="banner">
+        {/* Background */}
         <AnimatedBackground />
 
+        {/* Content Wrapper */}
         <div className="main-container">
           <div className="center-content">
-            {/* Name animation */}
-            <h1 className="animated-name">
+            {/* Animated Name */}
+            <h1
+              className="animated-name"
+              aria-label={`Portfolio of ${name}`}
+            >
               {name.split("").map((letter, index) => (
                 <span
                   key={index}
@@ -35,10 +40,10 @@ function App() {
               ))}
             </h1>
 
-            {/* Scroll indicator */}
+            {/* Scroll Indicator */}
             <div className="scroll-indicator fade-in">
               <p className="scroll-text">Scroll down</p>
-              <div className="scroll-box">
+              <div className="scroll-box" aria-hidden="true">
                 <div className="scroll-dot"></div>
               </div>
             </div>
@@ -46,11 +51,13 @@ function App() {
         </div>
       </section>
 
-      {/* SCROLL SECTION WITH NAVBAR */}
+      {/* CONTENT SECTION */}
       <ScrollSection>
-        <PillNav items={navItems} />
+        <div className="nav-wrapper">
+          <PillNav items={navItems} />
+        </div>
       </ScrollSection>
-    </>
+    </div>
   );
 }
 
